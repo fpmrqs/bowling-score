@@ -1,0 +1,25 @@
+{
+  "name": "bowling-score",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx jest",
+    "build": "esbuild ./lib/index.js --bundle --outfile=bundle.js --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fpmrqs/bowling-score.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fpmrqs/bowling-score/issues"
+  },
+  "homepage": "https://github.com/fpmrqs/bowling-score#readme",
+  "dependencies": {
+    "esbuild": "^0.14.27",
+    "jest": "^27.5.1"
+  }
+}
