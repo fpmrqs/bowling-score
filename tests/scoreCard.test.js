@@ -8,7 +8,7 @@ class frameMock {
     this.bonus = 0;
   }
 
-  addRoll() { return }
+  addRoll(roll) { this.rolls.push(roll) }
 }
 
 describe("ScoreCard class", () => {
@@ -24,43 +24,40 @@ describe("ScoreCard class", () => {
     expect(addRollSpy).toHaveBeenCalledTimes(1);
   });
 
-  // describe("maximum pins", () => {
-  //   it("adds maximum of 10 pins", () => {
-  //     expect(() => scoreCard.addKnockedPins(11)).toThrow(
-  //       "this is a 10 pins bowling game!"
-  //     );
-  //   });
+  describe("maximum pins", () => {
+    it("adds maximum of 10 pins", () => {
+      expect(() => scoreCard.addKnockedPins(11)).toThrow(
+        "this is a 10 pins bowling game!"
+      );
+    });
 
-  //   it("adds maximum of 10 pins across two throws or a frame", () => {
-  //     scoreCard.addKnockedPins(6);
-  //     expect(() => scoreCard.addKnockedPins(6)).toThrow(
-  //       "this is a 10 pins bowling game!"
-  //     );
-  //   });
-  // })
+    it("adds maximum of 10 pins across two throws or a frame", () => {
+      scoreCard.frames.at(-1).rolls = [6]
+      expect(() => scoreCard.addKnockedPins(6)).toThrow(
+        "this is a 10 pins bowling game!"
+      );
+    });
+  })
 
-  // it("closes frame after strike", () => {
-  //   scoreCard.addKnockedPins(10);
-  //   frameMock.rolls = []
-  //   scoreCard.addKnockedPins(5);
-  //   console.log(scoreCard.frames)
+  it("closes frame after strike", () => {
+    scoreCard.addKnockedPins(10);
+    scoreCard.addKnockedPins(5);
+    
 
-  //   expect(scoreCard.frames.length).toEqual(2);
-  // });
+    expect(scoreCard.frames.length).toEqual(2);
+  });
 
-  // describe("tenth frame", () => {
-  //   it("strike on roll 1 lets you roll again", () => {
-  //     for (let i = 0; i < 9; i++) {
-  //       scoreCard.addKnockedPins(5);
-  //       scoreCard.addKnockedPins(5);
-  //       frameMock.rolls = []
-  //     }
+  describe("tenth frame", () => {
+    it("strike on roll 1 lets you roll again", () => {
+      for (let i = 0; i < 18; i++) {
+        scoreCard.addKnockedPins(4);
+      }
+      console.log(scoreCard.frames)
 
-  //     scoreCard.addKnockedPins(10)
-  //     frameMock.rolls = []
-  //     scoreCard.addKnockedPins(5)
+      scoreCard.addKnockedPins(10)
+      scoreCard.addKnockedPins(5)
 
-  //     expect(scoreCard.frames.length).toEqual(10);
-  //   });
-  // })
+      expect(scoreCard.frames.length).toEqual(10);
+    });
+  })
 });
