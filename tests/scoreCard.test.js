@@ -52,7 +52,6 @@ describe("ScoreCard class", () => {
       for (let i = 0; i < 18; i++) {
         scoreCard.addKnockedPins(4);
       }
-      console.log(scoreCard.frames)
 
       scoreCard.addKnockedPins(10)
       scoreCard.addKnockedPins(5)
