@@ -5,10 +5,13 @@ class frameMock {
   constructor() {
     this.rolls = [];
     this.isDone = false;
+    this.isStrike = false;
+    this.isSpare = false;
     this.bonus = 0;
   }
 
   addRoll(roll) { this.rolls.push(roll) }
+  getPoints() {return}
 }
 
 describe("ScoreCard class", () => {
@@ -57,6 +60,29 @@ describe("ScoreCard class", () => {
       scoreCard.addKnockedPins(5)
 
       expect(scoreCard.frames.length).toEqual(10);
+    });
+  })
+
+  describe("adding bonus points", () => {
+    it("adds strike bonus to previous frame", () => {
+
+      scoreCard.addKnockedPins(10)
+      scoreCard.frames.at(-1).isStrike = true;
+      scoreCard.addKnockedPins(5)
+      scoreCard.addKnockedPins(4)
+
+      expect(scoreCard.frames.at(-2).bonus).toEqual(9);
+    });
+
+    it("adds strike bonus to previous frame", () => {
+
+      scoreCard.addKnockedPins(5)
+      scoreCard.addKnockedPins(5)
+      scoreCard.frames.at(-1).isSpare = true;
+      scoreCard.addKnockedPins(5)
+      scoreCard.addKnockedPins(4)
+
+      expect(scoreCard.frames.at(-2).bonus).toEqual(5);
     });
   })
 });

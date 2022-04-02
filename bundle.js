@@ -36,12 +36,43 @@
     }
   });
 
+  // lib/model/dataOutput.js
+  var require_dataOutput = __commonJS({
+    "lib/model/dataOutput.js"(exports, module) {
+      var DataOutput = class {
+        constructor() {
+          this.displayRolls = [];
+          this.displayFramePoints = [];
+        }
+        addRoll(roll) {
+          this.displayRolls.push(roll.toString());
+          if (this.#isStandardStrike(roll) || this.#noBonusRoll()) {
+            this.displayRolls.push("X");
+          }
+        }
+        getRoll(index) {
+          return this.displayRolls[index];
+        }
+        #isStandardStrike(roll) {
+          return roll === 10 && this.displayRolls.length < 18 && this.displayRolls.length % 2 !== 0;
+        }
+        #noBonusRoll() {
+          let lastFramePoints = parseInt(this.displayRolls.at(-1)) + parseInt(this.displayRolls.at(-2));
+          return this.displayRolls.length === 20 && lastFramePoints % 10 !== 0;
+        }
+      };
+      module.exports = DataOutput;
+    }
+  });
+
   // lib/model/scoreCard.js
   var require_scoreCard = __commonJS({
     "lib/model/scoreCard.js"(exports, module) {
       var Frame = require_frame();
+      var DataOutput = require_dataOutput();
       var ScoreCard2 = class {
-        constructor(frame = Frame) {
+        constructor(frame = Frame, output = new DataOutput()) {
+          this.output = output;
           this.frame = frame;
           this.frames = [new this.frame()];
         }
@@ -49,21 +80,12 @@
           if (this.#currFrame().isDone) {
             this.frames.push(new this.frame());
           }
-          if (this.frames.length === 10) {
-            if (this.#currFrameRolls().length === 0)
-              this.#validateRoll(pins);
-            if (this.#currFrameRolls().length === 1) {
-              this.#currFrame().addRoll(pins);
-            } else if (this.#currFrameRolls().length === 2) {
-              if (this.#currFrameRolls() == [10, 10]) {
-                this.#currFrame().addRoll(pins);
-              }
-            }
-          } else {
+          if (this.#currFramePoints() < 10)
             this.#validateRoll(pins);
-            this.#currFrame().addRoll(pins);
-            this.#closeFrame();
-          }
+          this.#currFrame().addRoll(pins);
+          this.output.addRoll(pins);
+          this.#closeFrame();
+          this.#addBonus();
         }
         #currFrameRolls() {
           return this.frames.at(-1).rolls;
@@ -79,9 +101,17 @@
             throw "this is a 10 pins bowling game!";
           }
         }
+        #addBonus() {
+          if (this.#currFrame().isDone && this.frames.length > 1) {
+            if (this.frames.at(-2).isStrike)
+              this.frames.at(-2).bonus += this.#currFramePoints();
+            if (this.frames.at(-2).isSpare)
+              this.frames.at(-2).bonus += this.#currFrameRolls()[0];
+          }
+        }
         #closeFrame() {
           if (this.frames.length === 10) {
-            if (this.#currFramePoints() < 20 && this.#currFrameRolls().length === 2) {
+            if (this.#currFramePoints() % 10 === 0 && this.#currFrameRolls().length === 2) {
               this.#currFrame().isDone = true;
             } else if (this.#currFrameRolls().length === 3) {
               this.#currFrame().isDone = true;
@@ -106,21 +136,20 @@
           this.pinsInputEl = document.querySelector("#pins-input");
           this.submitButtonEl.addEventListener("click", () => {
             this.model.addKnockedPins(parseInt(this.pinsInputEl.value));
-            const frames = this.model.frames;
-            const totals = this.model.frames.getPoints();
+            const rolls = this.model.output.displayRolls;
+            const totals = this.model.frames.map((frame) => {
+              return frame.getPoints();
+            });
             const rollCells = document.querySelectorAll(".roll-points");
             const frameCells = document.querySelectorAll(".frame-points");
             const totalCell = document.querySelector(".total-points");
-            let allRolls = [];
-            for (let i = 0; i < frames.length; i++) {
-              frames[i], forEach((frame) => {
-                frame.rolls.forEach((roll) => allRolls.push(roll));
-              });
+            for (let i = 0; i < rolls.length; i++) {
+              rollCells[i].innerText = rolls[i];
             }
             for (let i = 0; i < totals.length; i++) {
-              frameCells[i].innerText = totals[i].total.toString();
+              frameCells[i].innerText = totals[i].toString();
             }
-            totalCell.innerText = this.model.getTotalPoints().toString();
+            totalCell.innerText = totals.reduce((sum, points) => sum + points, 0);
           });
         }
       };

@@ -1,7 +1,13 @@
+main {
+  overflow: auto;
+}
+
 .main-table {
   border: 1px solid black;
   width: 80%;
   empty-cells: show;
+  border-collapse: collapse;
+  table-layout: fixed;
 }
 
 .table-header, .roll-points, .frame-points {
