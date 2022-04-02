@@ -10,61 +10,63 @@
 </head>
 <body>
   <header>
-  <h1>Fran goes bowling</h1>
+  <h1>Fran goes <span class="orange">bowling</span></h1>
   </header>
 
   <main>
-    <table class="main-table">
-      <tr>
-        <th class="table-header" colspan="2">1</th>
-        <th class="table-header" colspan="2">2</th>
-        <th class="table-header" colspan="2">3</th>
-        <th class="table-header" colspan="2">4</th>
-        <th class="table-header" colspan="2">5</th>
-        <th class="table-header" colspan="2">6</th>
-        <th class="table-header" colspan="2">7</th>
-        <th class="table-header" colspan="2">8</th>
-        <th class="table-header" colspan="2">9</th>
-        <th class="table-header" colspan="3">10</th>
-        <th class="table-header" colspan="2">Total</th>
-      </tr>
-      <tr>
-        <td class="roll-points"></td>
-        <td class="roll-points"></td>
-        <td class="roll-points"></td>
-        <td class="roll-points"></td>
-        <td class="roll-points"></td>
-        <td class="roll-points"></td>
-        <td class="roll-points"></td>
-        <td class="roll-points"></td>
-        <td class="roll-points"></td>
-        <td class="roll-points"></td>
-        <td class="roll-points"></td>
-        <td class="roll-points"></td>
-        <td class="roll-points"></td>
-        <td class="roll-points"></td>
-        <td class="roll-points"></td>
-        <td class="roll-points"></td>
-        <td class="roll-points"></td>
-        <td class="roll-points"></td>
-        <td class="roll-points"></td>
-        <td class="roll-points"></td>
-        <td class="roll-points"></td>
-        <td class="total-points"></td>
-      </tr>
-      <tr>
-        <td class="frame-points" colspan="2"></td>
-        <td class="frame-points" colspan="2"></td>
-        <td class="frame-points" colspan="2"></td>
-        <td class="frame-points" colspan="2"></td>
-        <td class="frame-points" colspan="2"></td>
-        <td class="frame-points" colspan="2"></td>
-        <td class="frame-points" colspan="2"></td>
-        <td class="frame-points" colspan="2"></td>
-        <td class="frame-points" colspan="2"></td>
-        <td class="frame-points" colspan="3"></td>
-      </tr>
-    </table>
+    <div class="table-container">
+      <table class="main-table">
+        <tr>
+          <th class="table-header" colspan="2">1</th>
+          <th class="table-header" colspan="2">2</th>
+          <th class="table-header" colspan="2">3</th>
+          <th class="table-header" colspan="2">4</th>
+          <th class="table-header" colspan="2">5</th>
+          <th class="table-header" colspan="2">6</th>
+          <th class="table-header" colspan="2">7</th>
+          <th class="table-header" colspan="2">8</th>
+          <th class="table-header" colspan="2">9</th>
+          <th class="table-header" colspan="3">10</th>
+          <th class="table-header" colspan="2">Total</th>
+        </tr>
+        <tr>
+          <td class="roll-points"></td>
+          <td class="roll-points"></td>
+          <td class="roll-points"></td>
+          <td class="roll-points"></td>
+          <td class="roll-points"></td>
+          <td class="roll-points"></td>
+          <td class="roll-points"></td>
+          <td class="roll-points"></td>
+          <td class="roll-points"></td>
+          <td class="roll-points"></td>
+          <td class="roll-points"></td>
+          <td class="roll-points"></td>
+          <td class="roll-points"></td>
+          <td class="roll-points"></td>
+          <td class="roll-points"></td>
+          <td class="roll-points"></td>
+          <td class="roll-points"></td>
+          <td class="roll-points"></td>
+          <td class="roll-points"></td>
+          <td class="roll-points"></td>
+          <td class="roll-points"></td>
+          <td class="total-points" colspan="2" rowspan="2"></td>
+        </tr>
+        <tr>
+          <td class="frame-points" colspan="2"></td>
+          <td class="frame-points" colspan="2"></td>
+          <td class="frame-points" colspan="2"></td>
+          <td class="frame-points" colspan="2"></td>
+          <td class="frame-points" colspan="2"></td>
+          <td class="frame-points" colspan="2"></td>
+          <td class="frame-points" colspan="2"></td>
+          <td class="frame-points" colspan="2"></td>
+          <td class="frame-points" colspan="2"></td>
+          <td class="frame-points" colspan="3"></td>
+        </tr>
+      </table>
+    </div>
 
     <ul class="nav_fields">
       <li><input type="text" id="pins-input" placeholder="knocked pins" /></li>

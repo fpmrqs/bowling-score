@@ -1,17 +1,53 @@
-main {
-  overflow: auto;
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Bungee+Shade&display=swap');
+
+body {
+  background-color: #FEC547;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  color: #02ac79;
+  font-family: 'Bungee Shade', cursive;
+}
+
+.orange {
+  color: #FD4E00;
+}
+
+.table-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .main-table {
-  border: 1px solid black;
-  width: 80%;
+  font-family: 'Abril Fatface', cursive;
+  color: white;
+  border: solid 3px #FEC547;
+  width: 90%;
   empty-cells: show;
   border-collapse: collapse;
   table-layout: fixed;
 }
 
 .table-header, .roll-points, .frame-points {
-  border: 1px solid black;
+  background-color: #FD4E00;
+  border: solid 3px #FEC547;
   text-align: center;
-  height: 1.2em;
+  height: 2em;
+}
+
+.roll-points {
+  background-color: #02ac79;
+}
+
+.total-points {
+  font-size: 1.2em;
+  background-color: #FD4E00;
+  text-align: center;
 }
