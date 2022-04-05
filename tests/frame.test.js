@@ -1,4 +1,4 @@
-const Frame = require("../lib/model/frame")
+const Frame = require("../public/lib/model/frame")
 
 describe("Frame class", () => {
 

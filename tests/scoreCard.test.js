@@ -1,4 +1,4 @@
-const ScoreCard = require("../lib/model/scoreCard");
+const ScoreCard = require("../public/lib/model/scoreCard");
 // const Frame = require("../lib/model/frame");
 
 class frameMock {

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npx jest",
+    "start": "node app.js",
     "build": "esbuild ./lib/index.js --bundle --outfile=bundle.js --watch"
   },
   "repository": {
@@ -19,7 +20,9 @@
   },
   "homepage": "https://github.com/fpmrqs/bowling-score#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "esbuild": "^0.14.27",
+    "express": "^4.17.3",
     "jest": "^27.5.1"
   }
 }

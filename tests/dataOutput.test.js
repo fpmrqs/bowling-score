@@ -1,4 +1,4 @@
-const DataOutput = require("../lib/model/dataOutput");
+const DataOutput = require("../public/lib/model/dataOutput");
 
 describe("DataOutput class", () => {
   let output;
